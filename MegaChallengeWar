@@ -1,0 +1,34 @@
+public class Deck
+    {
+        public int NumberOfCardsInDeck { get; set; }
+        public string[] Suites { get; set; }
+        public List Deck1 { get; set; }
+
+        public Deck()
+        {
+            NumberOfCardsInDeck = 52;
+            Suites = new string[] { "Spades", "clubs", "Hearts", "Diamonds" };
+            Deck1 = new List() { };
+        }
+
+        public void SetupNewDeck()
+        {
+            NumberOfCardsInDeck = 52;
+            foreach (var suiteName in Suites)
+                for (int cardValue = 1; cardValue &lt; 14; cardValue++)
+                    Deck1.Add(new Card(cardValue, suiteName));
+        }
+
+        internal void shuffleDeck(Random random, Deck NewDeck, int ShuffleCount)
+        {
+            int RandomPostionToSwop1, RandomPostionToSwop2; 
+
+            for (int i = 0; i &lt; ShuffleCount; i++)
+            {
+                RandomPostionToSwop1 = random.Next(0, 26);
+                RandomPostionToSwop2 = 52 - RandomPostionToSwop1;
+                NewDeck.Deck1.Reverse(RandomPostionToSwop1, RandomPostionToSwop2);
+            }
+        }
+    }
+}
