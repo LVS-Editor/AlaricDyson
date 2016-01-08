@@ -1,0 +1,26 @@
+ internal string DealCardsEvenlyToPlayers(Player _PlayerOne, Player _PlayerTwo, Deck _NewDeck)
+        {
+            string _result = "";
+            int AlternateCards = 0;
+            foreach (var dealtCard in _NewDeck.Deck1)s
+            {
+                if (AlternateCards == 0)
+                {
+                    _PlayerOne.CardPile.Add(dealtCard);
+                    _result += String.Format("{0} is dealt the {1} of {2}", _PlayerOne.Name, dealtCard.StringValue, dealtCard.Suite);
+                    AlternateCards++;
+                }
+                else
+                {
+                    _PlayerTwo.CardPile.Add(dealtCard);
+                    _result += String.Format("{0} is dealt the {1} of {2}", _PlayerTwo.Name, dealtCard.StringValue, dealtCard.Suite);
+                    AlternateCards--;
+                }
+            }
+
+            // Empty Deck of dealt cards
+            _NewDeck.Deck1.RemoveRange(0, _NewDeck.NumberOfCardsInDeck);
+            _NewDeck.NumberOfCardsInDeck = 0;
+            return _result;
+        }
+    }
