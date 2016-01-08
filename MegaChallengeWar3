@@ -1,0 +1,54 @@
+<code>
+    public class Card
+    {
+        public string Suite { get; set; }
+        public int Value { get; set; }
+        public string StringValue { get; set; }
+
+        public Card()
+        {
+            Value = 0;
+            Suite = "";
+            StringValue = "";
+        }
+
+        public Card(int _value, string _suite) :this()
+        {   
+            Value = _value;
+            Suite = _suite;
+
+            if (_value == 1)
+                StringValue = "Ace";
+            else if (_value == 11)
+                StringValue = "Jack";
+            else if (_value == 12)
+                StringValue = "Queen";
+            else if (_value == 13)
+                StringValue = "King";
+            else if (_value &gt; 13)
+                StringValue = "Joker";  // Not needed here
+            else 
+                StringValue = (_value).ToString();
+        }
+    }
+</code>
+
+The following code ran from the click "PLAY" event to setup the game
+
+<code>
+        protected void playButton_Click(object sender, EventArgs e)
+        {
+            Deck NewDeck = new Deck();
+            Player PlayerOne = new Player("Player One");
+            Player PlayerTwo = new Player("Player Two");
+            Battle NewBattle = new Battle(NewDeck,PlayerOne,PlayerTwo);
+
+            NewDeck.SetupNewDeck();     // Setup New Deck of cards
+
+            NewDeck.shuffleDeck(random, NewDeck, random.Next(200, 600));  // Shuffle Deck Reverse Order Randomly 200 - 600 times
+            resultLabel.Text = "Shuffled deck";
+            // Deal cards to Player
+            resultLabel.Text += NewDeck.DealCardsEvenlyToPlayers(PlayerOne, PlayerTwo, NewDeck);
+ .....
+
+</code>
